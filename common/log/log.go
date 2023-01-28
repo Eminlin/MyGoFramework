@@ -49,7 +49,7 @@ func InitLog() {
 	log = logrus.New()
 	level := DebugLevel
 	timeData := time.Now().Format("2006_01_02")
-	logFile, err := os.OpenFile("log/HamZoneGo_"+timeData+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	logFile, err := os.OpenFile("log/Go_"+timeData+".log", os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
 		fmt.Println(err.Error())
 		return
