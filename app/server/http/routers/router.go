@@ -1,21 +1,17 @@
 package routers
 
 import (
+	"MyGoFramework/app/server/service"
 	"MyGoFramework/common/log"
 
-	"github.com/gorilla/mux"
+	"github.com/labstack/echo/v4"
 )
 
 type Router struct {
 	Log *log.Log
 }
 
-func (r *Router) SetRouter() *mux.Router {
-
-	//总路由
-	router := mux.NewRouter()
-
-	r.openAPI(router)
-
-	return router
+func (r *Router) SetRouter(e *echo.Echo) {
+	api := e.Group("/v1")
+	api.GET("/hi", service.Hi)
 }

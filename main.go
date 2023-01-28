@@ -4,16 +4,24 @@ import (
 	"MyGoFramework/bootstrap"
 	"MyGoFramework/common/conf"
 	"MyGoFramework/common/log"
-	"net/http"
 
 	"MyGoFramework/app/server/http/routers"
+
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	bootstrap.Init()
+
+	e := echo.New()
+	e.Use(middleware.Recover())
+	e.Use(middleware.RequestID())
+
 	r := routers.Router{Log: log.NewLog()}
+
+	r.SetRouter(e)
+
 	log.NewLog().Infoln("starting server at:", conf.AppConf.App.HostPort)
-	if err := http.ListenAndServe(conf.AppConf.App.HostPort, r.SetRouter()); err != nil {
-		log.NewLog().Errorln(err)
-	}
+	e.Start(conf.AppConf.App.HostPort)
 }
