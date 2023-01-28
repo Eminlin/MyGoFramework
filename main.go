@@ -17,6 +17,7 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Recover())
 	e.Use(middleware.RequestID())
+	e.Logger.SetOutput(log.LogIO)
 
 	r := routers.Router{Log: log.NewLog()}
 

@@ -17,11 +17,13 @@ type Log struct {
 	log  *logrus.Logger
 }
 
-//log 单例log
+// log 单例log
 var log *logrus.Logger
 
-//stdErrFileHandler 把文件句柄保存到全局变量，避免被GC回收
+// stdErrFileHandler 把文件句柄保存到全局变量，避免被GC回收
 var stdErrFileHandler *os.File
+
+var LogIO io.Writer
 
 const (
 	// PanicLevel level, highest level of severity. Logs and then calls panic with the
@@ -59,16 +61,17 @@ func InitLog() {
 	})
 	// defer file.Close()
 	mw := io.MultiWriter(stdErrFileHandler, os.Stdout)
+	LogIO = mw
 	setLog(mw, level)
 }
 
-//SetLog 设置日志重定向输出及日志级别
+// SetLog 设置日志重定向输出及日志级别
 func setLog(fi io.Writer, level logrus.Level) {
 	log.SetOutput(fi)
 	log.SetLevel(level)
 }
 
-//NewLog new obj
+// NewLog new obj
 func NewLog() *Log {
 	return &Log{
 		UUID: uuid.NewV4(),
@@ -95,7 +98,7 @@ func (e *Log) getParamsf(format string) string {
 	return format
 }
 
-//ln后缀的参数格式化
+// ln后缀的参数格式化
 func (e *Log) getParamsln(args ...interface{}) []interface{} {
 	base := e.getBaseMsg()
 	params := []interface{}{}
