@@ -5,7 +5,7 @@ import (
 	"MyGoFramework/common/conf"
 	"MyGoFramework/common/log"
 
-	"MyGoFramework/app/server/http/routers"
+	"MyGoFramework/app/server/routers"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
