@@ -1,7 +1,7 @@
 package code
 
 import (
-	entities "MyGoFramework/app/server/http/entities/out"
+	entities "MyGoFramework/app/server/entities/out"
 	"MyGoFramework/common/log"
 	"encoding/json"
 	"fmt"

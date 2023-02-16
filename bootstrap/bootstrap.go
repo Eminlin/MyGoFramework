@@ -2,7 +2,7 @@ package bootstrap
 
 import (
 	"MyGoFramework/app/cron"
-	"MyGoFramework/app/server/http/code"
+	"MyGoFramework/app/server/code"
 	"MyGoFramework/common/cache"
 	"MyGoFramework/common/conf"
 	"MyGoFramework/common/database"
